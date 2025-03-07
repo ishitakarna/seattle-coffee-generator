@@ -4,6 +4,7 @@ import CoffeeGrid from "@/components/CoffeeGrid";
 import { FaDice } from "react-icons/fa"; 
 import { Cinzel, Caveat, Poppins } from "next/font/google";
 import FeaturedCafe from "@/components/FeaturedCafe";
+import BackgroundMusic from "@/components/BackgroundMusic";
 
 type Cafe = {
   id: number;
@@ -35,7 +36,7 @@ export default function Home() {
         data.map(async (cafe) => {
           const imgRes = await fetch(`/api/og-image?url=${encodeURIComponent(cafe.website)}`);
           const imgData = await imgRes.json();
-          return { ...cafe, image: imgData.image || "https://plus.unsplash.com/premium_photo-1674327105076-36c4419864cf?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YWVzdGhldGljJTIwY29mZmVlfGVufDB8fDB8fHww" };
+          return { ...cafe, image: imgData.image || null};
         })
       );
 
@@ -108,6 +109,8 @@ export default function Home() {
           <FaDice size={36} />
         )}
       </button>
+       
+      <BackgroundMusic /> 
     </div>
   );
 }
